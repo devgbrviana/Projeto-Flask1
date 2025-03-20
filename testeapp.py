@@ -235,3 +235,12 @@ class TestCrudAluno(unittest.TestCase):
             "turma_id": 1
         })
         self.assertEqual(resposta.status_code, 400)
+
+    def test_015_cria_aluno_com_dados_incompletos(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Lucas",
+            "matricula": "55555",
+            "idade": 20,
+        })
+        self.assertEqual(resposta.status_code, 400)
