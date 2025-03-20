@@ -122,3 +122,26 @@ class TestCrudAluno(unittest.TestCase):
         resposta = requests.get('http://localhost:5000/alunos/9999')
         self.assertEqual(resposta.status_code, 404)
         self.assertEqual(resposta.json()['erro'], 'Aluno não encontrado')
+
+    def test_007_atualiza_aluno_incompleto(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Gustavo",
+            "matricula": "99887",
+            "idade": 25,
+            "data_nascimento": "05/06/1995",
+            "nota_primeiro_semestre": 6.5,
+            "nota_segundo_semestre": 7.0,
+            "media_final": 6.75,
+            "turma_id": 1
+        })
+        aluno_criado = resposta.json()
+        aluno_id = aluno_criado['id']
+
+        resposta_put = requests.put(f'http://localhost:5000/alunos/{aluno_id}', json={
+            "nome": "Gustavo Santos"
+        })
+        self.assertEqual(resposta_put.status_code, 200)
+        aluno_atualizado = resposta_put.json()
+        self.assertEqual(aluno_atualizado['nome'], 'Gustavo Santos')
+        self.assertEqual(aluno_atualizado['idade'], 25)
