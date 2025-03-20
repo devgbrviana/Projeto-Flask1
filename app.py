@@ -179,3 +179,17 @@ def criar_turma():
         return jsonify(nova_turma)
     except Exception:
         return jsonify({"erro": "Erro ao criar turma"})
+    
+
+@app.route('/turmas/<int:id>', methods=['PUT'])
+def atualizar_turma(id):
+    try:
+        for turma in turmas:
+            if turma["id"] == id:
+                data = request.get_json()
+                turma["nome"] = data.get("nome", turma["nome"])
+                turma["professor_id"] = data.get("professor_id", turma["professor_id"])
+                return jsonify(turma)
+        return jsonify({"erro": "Turma não encontrada"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao atualizar turma"}), 500
