@@ -35,3 +35,19 @@ def criar_professor():
         return jsonify(novo_professor)
     except Exception:
         return jsonify({"erro": "Erro ao criar professor"})
+    
+
+@app.route('/professores/<int:id>', methods=['PUT'])
+def atualizar_professor(id):
+    try:
+        for professor in professores:
+            if professor["id"] == id:
+                data = request.get_json()
+                professor["nome"] = data.get("nome", professor["nome"])
+                professor["especialidade"] = data.get("especialidade", professor["especialidade"])
+                professor["idade"] = data.get("idade", professor["idade"])
+                professor["info"] = data.get("info", professor["info"])
+                return jsonify(professor)
+        return jsonify({"erro": "Professor não encontrado"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao atualizar professor"}), 500
