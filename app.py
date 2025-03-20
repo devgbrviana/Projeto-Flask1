@@ -63,3 +63,7 @@ def deletar_professor(id):
         return jsonify({"erro": "Professor não encontrado"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao deletar professor"}), 500
+
+@app.route('/alunos', methods=['GET'])
+def listar_alunos():
+    return jsonify(alunos)
