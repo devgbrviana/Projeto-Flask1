@@ -180,3 +180,17 @@ class TestCrudAluno(unittest.TestCase):
         resposta = requests.get('http://localhost:5000/alunos')
         self.assertEqual(resposta.status_code, 200)
         self.assertEqual(len(resposta.json()), 0)
+
+    def test_011_cria_varios_alunos(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        alunos_para_criar = [
+            {"nome": "Aluno 1", "matricula": "111", "idade": 18, "data_nascimento": "01/01/2005", "nota_primeiro_semestre": 7, "nota_segundo_semestre": 6, "media_final": 6.5, "turma_id": 1},
+            {"nome": "Aluno 2", "matricula": "222", "idade": 19, "data_nascimento": "02/02/2004", "nota_primeiro_semestre": 8, "nota_segundo_semestre": 7, "media_final": 7.5, "turma_id": 1},
+            {"nome": "Aluno 3", "matricula": "333", "idade": 20, "data_nascimento": "03/03/2003", "nota_primeiro_semestre": 9, "nota_segundo_semestre": 8, "media_final": 8.5, "turma_id": 1}
+        ]
+        for aluno in alunos_para_criar:
+            resposta = requests.post('http://localhost:5000/alunos', json=aluno)
+            self.assertEqual(resposta.status_code, 200)
+
+        resposta = requests.get('http://localhost:5000/alunos')
+        self.assertEqual(len(resposta.json()), 3)
