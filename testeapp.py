@@ -221,3 +221,17 @@ class TestCrudAluno(unittest.TestCase):
             "idade": "invalid"  # Dados inválidos
         })
         self.assertEqual(resposta_put.status_code, 400)
+
+    def test_014_cria_aluno_com_nota_negativa(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Ana",
+            "matricula": "98765",
+            "idade": 18,
+            "data_nascimento": "15/06/2004",
+            "nota_primeiro_semestre": -1,  # Nota negativa
+            "nota_segundo_semestre": 8.0,
+            "media_final": 7.0,
+            "turma_id": 1
+        })
+        self.assertEqual(resposta.status_code, 400)
