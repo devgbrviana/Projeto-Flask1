@@ -244,3 +244,7 @@ class TestCrudAluno(unittest.TestCase):
             "idade": 20,
         })
         self.assertEqual(resposta.status_code, 400)
+
+    def runTests():
+        suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestCrudAluno)
+        unittest.TextTestRunner(verbosity=2,failfast=True).run(suite)
