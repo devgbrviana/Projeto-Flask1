@@ -153,3 +153,24 @@ class TestCrudAluno(unittest.TestCase):
         })
         self.assertEqual(resposta.status_code, 400)
         self.assertIn("erro", resposta.json())
+
+    def test_009_deleta_aluno_ja_deletado(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Júlia",
+            "matricula": "55555",
+            "idade": 19,
+            "data_nascimento": "12/12/2001",
+            "nota_primeiro_semestre": 7.5,
+            "nota_segundo_semestre": 8.0,
+            "media_final": 7.75,
+            "turma_id": 1
+        })
+        aluno_criado = resposta.json()
+        aluno_id = aluno_criado['id']
+
+        resposta_delete = requests.delete(f'http://localhost:5000/alunos/{aluno_id}')
+        self.assertEqual(resposta_delete.status_code, 200)
+
+        resposta_delete_repetido = requests.delete(f'http://localhost:5000/alunos/{aluno_id}')
+        self.assertEqual(resposta_delete_repetido.status_code, 404)
