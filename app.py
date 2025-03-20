@@ -205,3 +205,7 @@ def deletar_turma(id):
         return jsonify({"erro": "Turma não encontrada"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao deletar turma"}), 500
+    
+if __name__ == "__main__":
+
+    app.run(debug=True)
