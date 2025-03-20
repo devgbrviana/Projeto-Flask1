@@ -5,3 +5,11 @@ app = Flask(__name__)
 professores = []
 alunos = []
 turmas = []
+
+
+@app.route('/reseta', methods=['POST'])
+def reseta():
+    alunos.clear()
+    professores.clear()
+    turmas.clear()
+    return jsonify({'status': 'dados resetados'}), 200
