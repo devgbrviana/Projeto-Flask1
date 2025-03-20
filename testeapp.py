@@ -194,3 +194,8 @@ class TestCrudAluno(unittest.TestCase):
 
         resposta = requests.get('http://localhost:5000/alunos')
         self.assertEqual(len(resposta.json()), 3)
+
+    def test_012_id_nao_numerico(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.get('http://localhost:5000/alunos/abc')
+        self.assertEqual(resposta.status_code, 400)
