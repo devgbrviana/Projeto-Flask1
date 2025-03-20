@@ -13,3 +13,8 @@ def reseta():
     professores.clear()
     turmas.clear()
     return jsonify({'status': 'dados resetados'}), 200
+
+
+@app.route('/professores', methods=['GET'])
+def listar_professores():
+    return jsonify(professores)
