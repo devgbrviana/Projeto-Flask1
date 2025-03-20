@@ -102,3 +102,20 @@ def criar_aluno():
         return jsonify(novo_aluno), 200
     except Exception as e:
         return jsonify({"erro": f"Erro ao criar aluno: {str(e)}"}), 500
+    
+@app.route('/alunos/<id>', methods=['GET'])
+def retorna_aluno_por_id(id):  # Método GET para retornar aluno por ID
+    try:
+        if not id.isdigit():
+            return jsonify({"erro": "ID inválido"}), 400
+        
+       
+        id = int(id)
+
+        for aluno in alunos:
+            if aluno["id"] == id:
+                return jsonify(aluno)
+        
+        return jsonify({"erro": "Aluno não encontrado"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao retornar aluno"}), 500
