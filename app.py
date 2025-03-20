@@ -67,3 +67,38 @@ def deletar_professor(id):
 @app.route('/alunos', methods=['GET'])
 def listar_alunos():
     return jsonify(alunos)
+
+@app.route('/alunos', methods=['POST'])
+def criar_aluno():
+    try:
+        data = request.get_json()
+
+       
+        campos_obrigatorios = ["nome", "matricula", "idade", "data_nascimento", 
+                               "nota_primeiro_semestre", "nota_segundo_semestre", 
+                               "media_final", "turma_id"]
+
+        for campo in campos_obrigatorios:
+            if campo not in data:
+                return jsonify({"erro": f"Campo '{campo}' é obrigatório"}), 400
+
+      
+        if data["nota_primeiro_semestre"] < 0 or data["nota_segundo_semestre"] < 0:
+            return jsonify({"erro": "Notas não podem ser negativas"}), 400
+
+      
+        novo_aluno = {
+            "id": len(alunos) + 1,
+            "nome": data["nome"],
+            "matricula": data["matricula"],
+            "idade": data["idade"],
+            "data_nascimento": data["data_nascimento"],
+            "nota_primeiro_semestre": data["nota_primeiro_semestre"],
+            "nota_segundo_semestre": data["nota_segundo_semestre"],
+            "media_final": data["media_final"],
+            "turma_id": data["turma_id"]
+        }
+        alunos.append(novo_aluno)
+        return jsonify(novo_aluno), 200
+    except Exception as e:
+        return jsonify({"erro": f"Erro ao criar aluno: {str(e)}"}), 500
