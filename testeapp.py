@@ -116,3 +116,9 @@ class TestCrudAluno(unittest.TestCase):
         self.assertEqual(resposta_delete.status_code, 200)
         resposta_get = requests.get(f'http://localhost:5000/alunos/{aluno_id}')
         self.assertEqual(resposta_get.status_code, 404)
+
+    def test_006_id_inexistente(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.get('http://localhost:5000/alunos/9999')
+        self.assertEqual(resposta.status_code, 404)
+        self.assertEqual(resposta.json()['erro'], 'Aluno não encontrado')
