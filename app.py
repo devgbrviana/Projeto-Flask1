@@ -165,3 +165,17 @@ def deletar_aluno(id):
 @app.route('/turmas', methods=['GET'])
 def listar_turmas():
     return jsonify(turmas)
+
+@app.route('/turmas', methods=['POST'])
+def criar_turma():
+    try:
+        data = request.get_json()
+        nova_turma = {
+            "id": len(turmas) + 1,
+            "nome": data["nome"],
+            "professor_id": data["professor_id"]
+        }
+        turmas.append(nova_turma)
+        return jsonify(nova_turma)
+    except Exception:
+        return jsonify({"erro": "Erro ao criar turma"})
