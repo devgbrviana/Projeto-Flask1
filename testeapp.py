@@ -145,3 +145,11 @@ class TestCrudAluno(unittest.TestCase):
         aluno_atualizado = resposta_put.json()
         self.assertEqual(aluno_atualizado['nome'], 'Gustavo Santos')
         self.assertEqual(aluno_atualizado['idade'], 25)
+
+    def test_008_cria_aluno_sem_dados_obrigatorios(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Pedro"
+        })
+        self.assertEqual(resposta.status_code, 400)
+        self.assertIn("erro", resposta.json())
