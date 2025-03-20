@@ -149,3 +149,14 @@ def atualizar_aluno(id):
 
     except Exception as e:
         return jsonify({"erro": "Erro ao atualizar aluno", "detalhes": str(e)}), 500
+    
+@app.route('/alunos/<int:id>', methods=['DELETE'])
+def deletar_aluno(id):
+    try:
+        for aluno in alunos:
+            if aluno["id"] == id:
+                alunos.remove(aluno)
+                return jsonify({"mensagem": "Aluno deletado"})
+        return jsonify({"erro": "Aluno não encontrado"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao deletar aluno"}), 500
