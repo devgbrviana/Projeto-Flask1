@@ -119,3 +119,33 @@ def retorna_aluno_por_id(id):  # Método GET para retornar aluno por ID
         return jsonify({"erro": "Aluno não encontrado"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao retornar aluno"}), 500
+
+
+@app.route('/alunos/<int:id>', methods=['PUT'])
+def atualizar_aluno(id):
+    try:
+      
+        for aluno in alunos:
+            if aluno["id"] == id:
+                
+                data = request.get_json()
+
+                if "idade" in data and not isinstance(data["idade"], int):
+                    return jsonify({"erro": "Idade inválida, precisa ser um número inteiro"}), 400
+
+              
+                aluno["nome"] = data.get("nome", aluno["nome"])
+                aluno["matricula"] = data.get("matricula", aluno["matricula"])
+                aluno["idade"] = data.get("idade", aluno["idade"])
+                aluno["data_nascimento"] = data.get("data_nascimento", aluno["data_nascimento"])
+                aluno["nota_primeiro_semestre"] = data.get("nota_primeiro_semestre", aluno["nota_primeiro_semestre"])
+                aluno["nota_segundo_semestre"] = data.get("nota_segundo_semestre", aluno["nota_segundo_semestre"])
+                aluno["media_final"] = data.get("media_final", aluno["media_final"])
+                aluno["turma_id"] = data.get("turma_id", aluno["turma_id"])
+
+                return jsonify(aluno), 200
+
+        return jsonify({"erro": "Aluno não encontrado"}), 404
+
+    except Exception as e:
+        return jsonify({"erro": "Erro ao atualizar aluno", "detalhes": str(e)}), 500
