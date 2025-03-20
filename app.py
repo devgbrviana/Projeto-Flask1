@@ -51,3 +51,15 @@ def atualizar_professor(id):
         return jsonify({"erro": "Professor não encontrado"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao atualizar professor"}), 500
+
+
+@app.route('/professores/<int:id>', methods=['DELETE'])
+def deletar_professor(id):
+    try:
+        for professor in professores:
+            if professor["id"] == id:
+                professores.remove(professor)
+                return jsonify({"mensagem": "Professor deletado"})
+        return jsonify({"erro": "Professor não encontrado"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao deletar professor"}), 500
