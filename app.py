@@ -193,3 +193,15 @@ def atualizar_turma(id):
         return jsonify({"erro": "Turma não encontrada"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao atualizar turma"}), 500
+    
+
+@app.route('/turmas/<int:id>', methods=['DELETE'])
+def deletar_turma(id):
+    try:
+        for turma in turmas:
+            if turma["id"] == id:
+                turmas.remove(turma)
+                return jsonify({"mensagem": "Turma deletada"})
+        return jsonify({"erro": "Turma não encontrada"}), 404
+    except Exception:
+        return jsonify({"erro": "Erro ao deletar turma"}), 500
