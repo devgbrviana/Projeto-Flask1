@@ -160,3 +160,8 @@ def deletar_aluno(id):
         return jsonify({"erro": "Aluno não encontrado"}), 404
     except Exception:
         return jsonify({"erro": "Erro ao deletar aluno"}), 500
+    
+
+@app.route('/turmas', methods=['GET'])
+def listar_turmas():
+    return jsonify(turmas)
