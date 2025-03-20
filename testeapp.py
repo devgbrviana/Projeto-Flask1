@@ -174,3 +174,9 @@ class TestCrudAluno(unittest.TestCase):
 
         resposta_delete_repetido = requests.delete(f'http://localhost:5000/alunos/{aluno_id}')
         self.assertEqual(resposta_delete_repetido.status_code, 404)
+
+    def test_010_lista_alunos_vazia_inicial(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.get('http://localhost:5000/alunos')
+        self.assertEqual(resposta.status_code, 200)
+        self.assertEqual(len(resposta.json()), 0)
