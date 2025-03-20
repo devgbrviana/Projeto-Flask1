@@ -199,3 +199,25 @@ class TestCrudAluno(unittest.TestCase):
         resposta = requests.post('http://localhost:5000/reseta')
         resposta = requests.get('http://localhost:5000/alunos/abc')
         self.assertEqual(resposta.status_code, 400)
+
+    def test_013_atualiza_aluno_com_dados_invalidos(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Victor",
+            "matricula": "77777",
+            "idade": 22,
+            "data_nascimento": "10/10/1998",
+            "nota_primeiro_semestre": 5.5,
+            "nota_segundo_semestre": 6.0,
+            "media_final": 5.75,
+            "turma_id": 1
+        })
+        aluno_criado = resposta.json()
+        aluno_id = aluno_criado['id']
+
+        resposta_put = requests.put(f'http://localhost:5000/alunos/{aluno_id}', json={
+            "nome": "Victor",
+            "matricula": "77777",
+            "idade": "invalid"  # Dados inválidos
+        })
+        self.assertEqual(resposta_put.status_code, 400)
