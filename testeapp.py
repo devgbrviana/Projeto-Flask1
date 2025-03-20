@@ -41,7 +41,7 @@ class TestCrudAluno(unittest.TestCase):
         self.assertEqual(resposta.status_code, 200)
         alunos = resposta.json()
         self.assertGreater(len(alunos), 0)
-        
+
 
     def test_003_retorna_aluno_por_id(self):
         resposta = requests.post('http://localhost:5000/reseta')
@@ -63,3 +63,34 @@ class TestCrudAluno(unittest.TestCase):
         aluno_retorno = resposta_get.json()
         self.assertEqual(aluno_retorno['id'], aluno_id)
         self.assertEqual(aluno_retorno['nome'], 'Carlos')
+
+
+    def test_004_atualiza_aluno(self):
+        resposta = requests.post('http://localhost:5000/reseta')
+        resposta = requests.post('http://localhost:5000/alunos', json={
+            "nome": "Felipe",
+            "matricula": "11223",
+            "idade": 23,
+            "data_nascimento": "20/02/1998",
+            "nota_primeiro_semestre": 8.0,
+            "nota_segundo_semestre": 7.5,
+            "media_final": 7.75,
+            "turma_id": 1
+        })
+        aluno_criado = resposta.json()
+        aluno_id = aluno_criado['id']
+
+        resposta_put = requests.put(f'http://localhost:5000/alunos/{aluno_id}', json={
+            "nome": "Felipe Silva",
+            "matricula": "11223",
+            "idade": 24,
+            "data_nascimento": "20/02/1997",
+            "nota_primeiro_semestre": 9.0,
+            "nota_segundo_semestre": 8.5,
+            "media_final": 8.75,
+            "turma_id": 1
+        })
+        self.assertEqual(resposta_put.status_code, 200)
+        aluno_atualizado = resposta_put.json()
+        self.assertEqual(aluno_atualizado['nome'], 'Felipe Silva')
+        self.assertEqual(aluno_atualizado['idade'], 24)
