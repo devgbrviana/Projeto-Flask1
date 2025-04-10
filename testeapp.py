@@ -245,9 +245,9 @@ class TestCrudAluno(unittest.TestCase):
         })
         self.assertEqual(resposta.status_code, 400)
 
-    def runTests():
-        suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestCrudAluno)
-        unittest.TextTestRunner(verbosity=2,failfast=True).run(suite)
+def runTests():
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestCrudAluno)
+    unittest.TextTestRunner(verbosity=2,failfast=True).run(suite)
 
-    if __name__ == '__main__':
-        runTests()
+if __name__ == '__main__':
+    runTests()
