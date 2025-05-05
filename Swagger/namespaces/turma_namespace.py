@@ -1,6 +1,6 @@
 
 from flask_restx import Namespace, Resource, fields
-from turma.model import (
+from turmas.model import (
     listar_turma, turma_por_id, adicionar_turma,atualizar_turma, excluir_turma
 )
 turma_ns = Namespace("turma", description="Operações relacionadas as turmas")
