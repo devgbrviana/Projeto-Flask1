@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: grupo2-api
+    env: python
+    plan: free
+    branch: dev
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
