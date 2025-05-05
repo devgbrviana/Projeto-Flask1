@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey
 from datetime import date, datetime
 from config import db
-from turma.model import Turma
+from turmas.model import Turma
 from flask import jsonify
 
 
