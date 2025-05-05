@@ -1,49 +1,56 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request, jsonify
 from professores.model import (
     listar_professores, professor_por_id, adicionar_professor,
-    atualizar_professor, excluir_professor, resetar_professores,
-    ProfessorNaoEncontrado
+    atualizar_professor, excluir_professor, ProfessorNaoEncontrado
+
 )
 
-professores_bp = Blueprint('professores', __name__)
+# Criando o Blueprint
+professor_bp = Blueprint('professor', __name__)
 
-@professores_bp.route('/professores', methods=['GET'])
+# Create
+@professor_bp.route('/professor', methods=['POST'])
+def create_professor():
+    try:
+        dados = request.json
+        # Chama a função que já existe em seu código
+        return adicionar_professor(dados)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Get all
+@professor_bp.route("/professor", methods=['GET'])
 def get_professores():
-    return jsonify(listar_professores()), 200
-
-@professores_bp.route('/professores/<int:id_professor>', methods=['GET'])
-def get_professor(id_professor):
     try:
-        return jsonify(professor_por_id(id_professor)), 200
-    except ProfessorNaoEncontrado:
-        return jsonify({'erro': 'Professor não encontrado'}), 404
+        # Chama a função que já existe em seu código
+        return jsonify(listar_professores())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-@professores_bp.route('/professores', methods=['POST'])
-def criar_professor():
-    dados = request.json
-    if not dados.get("nome") or not dados.get("siape") or not dados.get("formacao"):
-        return jsonify({'erro': 'Dados obrigatórios ausentes'}), 400
-    adicionar_professor(dados)
-    return jsonify(dados), 200
-
-@professores_bp.route('/professores/<int:id_professor>', methods=['PUT'])
-def atualizar_dados_professor(id_professor):
-    novos_dados = request.json
+# Get by ID
+@professor_bp.route('/professor/<int:professor_id>', methods=['GET'])
+def get_professor_por_id(professor_id):
     try:
-        atualizar_professor(id_professor, novos_dados)
-        return jsonify(professor_por_id(id_professor)), 200
-    except ProfessorNaoEncontrado:
-        return jsonify({'erro': 'Professor não encontrado'}), 404
+        return jsonify(professor_por_id(professor_id))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-@professores_bp.route('/professores/<int:id_professor>', methods=['DELETE'])
-def deletar_professor(id_professor):
+# Update
+@professor_bp.route("/professor/<int:professor_id>", methods=['PUT'])
+def update_professor(professor_id):
     try:
-        excluir_professor(id_professor)
-        return '', 200
-    except ProfessorNaoEncontrado:
-        return jsonify({'erro': 'Professor não encontrado'}), 404
+        dados = request.json
+        professor_response = atualizar_professor(professor_id, dados)
+        return jsonify(professor_response)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-@professores_bp.route('/reseta-professores', methods=['POST'])
-def resetar():
-    resetar_professores()
-    return '', 200
+# Delete
+@professor_bp.route('/professor/<int:professor_id>', methods=['DELETE'])
+def delete_professor(professor_id):
+    try:
+        result = excluir_professor(professor_id)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
