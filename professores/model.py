@@ -8,29 +8,21 @@ class Professor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     idade = db.Column(db.Integer)
-    data_nascimento = db.Column(db.Date)
     disciplina = db.Column(db.String(100))
     informacoes = db.Column(db.String(255))
 
     turmas = db.relationship('Turma', backref='Professor', lazy=True)
 
-    def __init__(self, nome, data_nascimento, disciplina, informacoes):
+    def __init__(self, nome, disciplina, informacoes):
         self.nome = nome
-        self.data_nascimento = data_nascimento
         self.idade = self.calcular_idade()
         self.disciplina = disciplina
         self.informacoes = informacoes
 
-    def calcular_idade(self):
-        hoje = date.today()
-        return hoje.year - self.data_nascimento.year - (
-            (hoje.month, hoje.day) < (self.data_nascimento.month, self.data_nascimento.day)
-        )
-
+    
     def to_dict(self):
         return {
             'id': self.id,
-            'data_nascimento': self.data_nascimento.strftime("%d/%m/%Y"),
             'nome': self.nome,
             'idade': self.idade,
             'disciplina': self.disciplina,
@@ -75,7 +67,6 @@ def atualizar_professor(professor_id, novos_dados):
         raise ProfessorNaoEncontrado("Professor não encontrado.")
 
     professor.nome = novos_dados["nome"]
-    professor.data_nascimento = datetime.strptime(novos_dados["data_nascimento"], "%d/%m/%Y").date()
     professor.disciplina = novos_dados.get("disciplina", professor.disciplina)
     professor.informacoes = novos_dados.get("informacoes", professor.informacoes)
     professor.idade = professor.calcular_idade()
