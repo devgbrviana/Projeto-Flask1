@@ -109,43 +109,42 @@ json
 ---
 
 ## 📦 Estrutura do Projeto
-
 ProjetoApi-s/
-│
 ├── controller/
-│   ├── routesAlunos.py   
-│   ├── routesProfessor.py 
-│   └── routesTurma.py    
+│   ├── routesAlunos.py
+│   ├── routesProfessor.py
+│   └── routesTurma.py
 │
 ├── instance/
-│   └── app.db           
+│   └── app.db
 │
 ├── models/
-│   ├── modelAluno.py   
-│   ├── modelProfessor.py  
-│   └── modelTurma.py  
+│   ├── modelAluno.py
+│   ├── modelProfessor.py
+│   └── modelTurma.py
 │
 ├── Swagger/
 │   └── namespaces/
-│       ├── aluno_namespace.py  
-│       ├── professor_namespace.py 
-│       └── turma_namespace.py   
+│       ├── aluno_namespace.py
+│       ├── professor_namespace.py
+│       └── turma_namespace.py
 │
 ├── TDD/
-│   ├── reseTestes.py 
-│   ├── testeAluno.py 
+│   ├── reseTestes.py
+│   ├── testeAluno.py
 │   ├── testeProfessor.py
-│   └── testeTurma.py     
+│   └── testeTurma.py
 │
-├── venv/                   # Ambiente virtual (não incluir no GitHub)
-├── app.py                 
-├── config.py 
-├── Dockerfile                 
-├── guardar.txt              
-├── README.md                
-├── requirements.txt          
+├── venv/                  # Ambiente virtual (não incluir no GitHub)
+├── app.py
+├── config.py
+├── Dockerfile
+├── guardar.txt
+├── README.md
+├── requirements.txt
 ├── teste.py
 └── todosTDD.py
+
 
 
 ---
