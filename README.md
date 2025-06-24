@@ -1,84 +1,81 @@
+
 # 📚 API de Gerenciamento Escolar
 
-Este repositório contém a API de Gerenciamento Escolar, desenvolvida com Flask e SQLAlchemy.
+Este repositório contém a **API de Gerenciamento Escolar**, desenvolvida em **Python com Flask e SQLAlchemy**, com persistência local via SQLite.
+
+---
 
 ## 🚀 Tecnologias Utilizadas
 
 - Python 3.x  
 - Flask  
 - SQLAlchemy  
-- SQLite (como banco de dados local)  
-- Requests (para consumo da API externa)
+- SQLite  
+- Requests  
+
+---
 
 ## ▶️ Como Executar a API
 
 1. **Clone o repositório**
-bash
-git clone https://github.com/devgbrviana/Projeto-Flask1.git
-cd Projeto-Flask1
-Crie um ambiente virtual (opcional, mas recomendado)
+   git clone https://github.com/devgbrviana/ProjetoApi-s.git
+   cd ProjetoApi-s
+   
 
-bash
-Copiar
-Editar
-python3 -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-Instale as dependências
+2. **Crie um ambiente virtual (opcional, mas recomendado)**
+ 
+   source venv/bin/activate  # Linux/macOS
+   venv\Scripts\activate     # Windows
+  
 
-bash
-Copiar
-Editar
-pip install -r requirements.txt
-Execute a API
+3. **Instale as dependências**
+   
+   pip install -r requirements.txt
+   
 
-bash
-Copiar
-Editar
-python app.py
-A aplicação estará disponível em: http://127.0.0.1:5000
+4. **Execute a API**
+  
+   python app.py
+   
 
-📝 O banco de dados é criado automaticamente na primeira execução.
+   A aplicação estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-📡 Endpoints Principais
-Professor
-GET /professor – Lista todos os professores
+📝 O banco de dados (`app.db`) será criado automaticamente na primeira execução.
 
-POST /professor – Cria um novo professor
+---
 
-GET /professor/<id> – Detalha um professor
+## 📡 Endpoints Principais
 
-PUT /professor/<id> – Atualiza um professor
+### 🔸 Professor
 
-DELETE /professor/<id> – Remove um professor
+- `GET /professor` – Lista todos os professores  
+- `POST /professor` – Cria um novo professor  
+- `GET /professor/<id>` – Detalha um professor  
+- `PUT /professor/<id>` – Atualiza um professor  
+- `DELETE /professor/<id>` – Remove um professor  
 
-Turma
-GET /turma – Lista todas as turmas
+### 🔸 Turma
 
-POST /turma – Cria uma nova turma
+- `GET /turma` – Lista todas as turmas  
+- `POST /turma` – Cria uma nova turma  
+- `GET /turma/<id>` – Detalha uma turma  
+- `PUT /turma/<id>` – Atualiza uma turma  
+- `DELETE /turma/<id>` – Remove uma turma  
 
-GET /turma/<id> – Detalha uma turma
+### 🔸 Aluno
 
-PUT /turma/<id> – Atualiza uma turma
+- `GET /alunos` – Lista todos os alunos  
+- `POST /alunos` – Cria um novo aluno  
+- `GET /alunos/<id>` – Detalha um aluno  
+- `PUT /alunos/<id>` – Atualiza um aluno  
+- `DELETE /alunos/<id>` – Remove um aluno  
 
-DELETE /turma/<id> – Remove uma turma
+---
 
-Alunos
-GET /alunos – Lista todos os alunos
+## 🔧 Exemplos de Corpo JSON
 
-POST /alunos – Cria um novo aluno
-
-GET /alunos/<id> – Detalha um aluno
-
-PUT /alunos/<id> – Atualiza um aluno
-
-DELETE /alunos/<id> – Remove um aluno
-
-🔧 Exemplo de corpo JSON para criação:
-Professor
+### 📄 Professor
 json
-Copiar
-Editar
 {
   "id": 2,
   "nome": "Priscilla Igreja",
@@ -86,20 +83,20 @@ Editar
   "materia": "Desenvolvimento de APIs",
   "observacoes": "Flask"
 }
-Turma
+
+
+### 📄 Turma
 json
-Copiar
-Editar
 {
   "id": 2,
   "descricao": "Desenvolvimento de APIs",
   "professor_id": 2,
   "ativo": "Ativo"
 }
-Aluno
+
+
+### 📄 Aluno
 json
-Copiar
-Editar
 {
   "nome": "José",
   "data_nascimento": "13/05/2005",
@@ -107,11 +104,13 @@ Editar
   "nota_segundo_semestre": 8,
   "turma_id": 1
 }
-📦 Estrutura do Projeto
-arduino
-Copiar
-Editar
-Projeto-Flask1/
+
+
+---
+
+## 📦 Estrutura do Projeto
+
+ProjetoApi-s/
 │
 ├── controller/
 │   ├── routesAlunos.py   
@@ -125,9 +124,9 @@ Projeto-Flask1/
 │   ├── modelAluno.py   
 │   ├── modelProfessor.py  
 │   └── modelTurma.py  
-│  
+│
 ├── Swagger/
-│   └── namespaces 
+│   └── namespaces/
 │       ├── aluno_namespace.py  
 │       ├── professor_namespace.py 
 │       └── turma_namespace.py   
@@ -138,8 +137,8 @@ Projeto-Flask1/
 │   ├── testeProfessor.py
 │   └── testeTurma.py     
 │
-├── venv/
-├── app.py                    
+├── venv/                   # Ambiente virtual (não incluir no GitHub)
+├── app.py                 
 ├── config.py 
 ├── Dockerfile                 
 ├── guardar.txt              
@@ -147,8 +146,17 @@ Projeto-Flask1/
 ├── requirements.txt          
 ├── teste.py
 └── todosTDD.py
-🛠️ Futuras Melhorias
-Autenticação em 2 fatores
+
+
+---
+
+## 🛠️ Futuras Melhorias
+
+- Implementação de autenticação em dois fatores (2FA)  
+- Integração com banco de dados externo (ex: PostgreSQL)  
+- Swagger completo com testes de integração  
+- Interface web para gestão visual dos dados
+
 
 🧑‍💻 Autor
 Gabriel de Souza Viana
