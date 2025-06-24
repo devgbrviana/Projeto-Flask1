@@ -137,7 +137,7 @@ ProjetoApi-s/
 ├── TDD/
 │   └── testeapp.py     
 │
-├── venv/                   # Ambiente virtual (não incluir no GitHub)
+├── venv/                   
 ├── app.py                 
 ├── config.py 
 ├── Dockerfile                 
@@ -145,7 +145,6 @@ ProjetoApi-s/
 ├── README.md                
 ├── requirements.txt          
 ├── teste.py
-└── todosTDD.py
 ```
 
 ---
