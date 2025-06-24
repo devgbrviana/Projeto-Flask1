@@ -18,25 +18,27 @@ Este repositório contém a **API de Gerenciamento Escolar**, desenvolvida em **
 ## ▶️ Como Executar a API
 
 1. **Clone o repositório**
+   ```bash
    git clone https://github.com/devgbrviana/ProjetoApi-s.git
    cd ProjetoApi-s
-   
+   ```
 
 2. **Crie um ambiente virtual (opcional, mas recomendado)**
- 
+   ```bash
+   python3 -m venv venv
    source venv/bin/activate  # Linux/macOS
    venv\Scripts\activate     # Windows
-  
+   ```
 
 3. **Instale as dependências**
-   
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 
 4. **Execute a API**
-  
+   ```bash
    python app.py
-   
+   ```
 
    A aplicação estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
@@ -75,7 +77,7 @@ Este repositório contém a **API de Gerenciamento Escolar**, desenvolvida em **
 ## 🔧 Exemplos de Corpo JSON
 
 ### 📄 Professor
-json
+```json
 {
   "id": 2,
   "nome": "Priscilla Igreja",
@@ -83,20 +85,20 @@ json
   "materia": "Desenvolvimento de APIs",
   "observacoes": "Flask"
 }
-
+```
 
 ### 📄 Turma
-json
+```json
 {
   "id": 2,
   "descricao": "Desenvolvimento de APIs",
   "professor_id": 2,
   "ativo": "Ativo"
 }
-
+```
 
 ### 📄 Aluno
-json
+```json
 {
   "nome": "José",
   "data_nascimento": "13/05/2005",
@@ -104,48 +106,47 @@ json
   "nota_segundo_semestre": 8,
   "turma_id": 1
 }
-
+```
 
 ---
 
 ## 📦 Estrutura do Projeto
+
+```plaintext
 ProjetoApi-s/
+│
 ├── controller/
-│   ├── routesAlunos.py
-│   ├── routesProfessor.py
-│   └── routesTurma.py
+│   ├── routesAlunos.py   
+│   ├── routesProfessor.py 
+│   └── routesTurma.py    
 │
 ├── instance/
-│   └── app.db
+│   └── app.db           
 │
 ├── models/
-│   ├── modelAluno.py
-│   ├── modelProfessor.py
-│   └── modelTurma.py
+│   ├── modelAluno.py   
+│   ├── modelProfessor.py  
+│   └── modelTurma.py  
 │
 ├── Swagger/
 │   └── namespaces/
-│       ├── aluno_namespace.py
-│       ├── professor_namespace.py
-│       └── turma_namespace.py
+│       ├── aluno_namespace.py  
+│       ├── professor_namespace.py 
+│       └── turma_namespace.py   
 │
 ├── TDD/
-│   ├── reseTestes.py
-│   ├── testeAluno.py
-│   ├── testeProfessor.py
-│   └── testeTurma.py
+│   └── testeapp.py     
 │
-├── venv/                  # Ambiente virtual (não incluir no GitHub)
-├── app.py
-├── config.py
-├── Dockerfile
-├── guardar.txt
-├── README.md
-├── requirements.txt
+├── venv/                   # Ambiente virtual (não incluir no GitHub)
+├── app.py                 
+├── config.py 
+├── Dockerfile                 
+├── guardar.txt              
+├── README.md                
+├── requirements.txt          
 ├── teste.py
 └── todosTDD.py
-
-
+```
 
 ---
 
@@ -155,6 +156,7 @@ ProjetoApi-s/
 - Integração com banco de dados externo (ex: PostgreSQL)  
 - Swagger completo com testes de integração  
 - Interface web para gestão visual dos dados
+
 
 
 🧑‍💻 Autor
